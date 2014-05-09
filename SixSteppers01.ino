@@ -96,7 +96,7 @@ void setup() {
 void loop() {
 
   // this is the frequency iterator, it is used inside a sine function to create oscillation of the servo
-  frequency += 0.005;
+  frequency += 0.009;
 
   // read the sensor and store it in the variable sensorReading:
   piezoValue1 = analogRead(piezoSensor1);
@@ -115,12 +115,19 @@ void loop() {
   // iterates through the event if it has been triggered
   retractionCheck();
   
-  servoAngle1 = 180 / retMult1 * abs(sin(frequency + 0.33));
-  servoAngle2 = 180 / retMult2 * abs(sin(frequency + 0.66));
-  servoAngle3 = 180 / retMult3 * abs(sin(frequency + 1));
-  servoAngle4 = 180 / retMult4 * abs(sin(frequency + 1.33));
-  servoAngle5 = 180 / retMult5 * abs(sin(frequency + 1.66));
-  servoAngle6 = 180 / retMult6 * abs(sin(frequency));
+  servoAngle1 = 180 * abs(sin(frequency));
+  servoAngle2 = 180 * abs(sin(frequency +.33));
+  servoAngle3 = 180 * abs(sin(frequency + .66));
+  servoAngle4 = 180 * abs(sin(frequency + 1));
+  servoAngle5 = 180 * abs(sin(frequency + 1.33));
+  servoAngle6 = 180 * abs(sin(frequency + 1.66));
+  
+//  servoAngle1 = 180;
+//  servoAngle2 = 180;
+//  servoAngle3 = 180;
+//  servoAngle4 = 180;
+//  servoAngle5 = 180;
+//  servoAngle6 = 180;
   
   servoMotor1.write(servoAngle1);
   servoMotor2.write(servoAngle2);
@@ -190,32 +197,32 @@ void piezoCheck() {
   if (piezoValue1 >= threshold) {
     retraction1 = true;
     countdown1 = 4000;
-    retMult1 = 179;
+    frequency = .025;
   }
   if (piezoValue2 >= threshold) {
     retraction2 = true;
     countdown2 = 3500;
-    retMult2 = 179;
+    frequency = .025;
   }
   if (piezoValue3 >= threshold) {
     retraction3 = true;
     countdown3 = 1000;
-    retMult3 = 179;
+    frequency = .025;
   }
   if (piezoValue4 >= threshold) {
     retraction4 = true;
     countdown4 = 2000;
-    retMult4 = 179;
+    frequency = .025;
   }
   if (piezoValue5 >= threshold) {
     retraction5 = true;
     countdown5 = 10000;
-    retMult5 = 179;
+    frequency = .025;
   }
   if (piezoValue6 >= threshold) {
     retraction6 = true;
     countdown6 = 6000;
-    retMult6 = 179;
+    frequency = .025;
   }
 }
 
